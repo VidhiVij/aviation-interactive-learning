@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Select Aircraft</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark">
+
+<h1 class="page-title">Select an Aircraft</h1>
+
+<input
+  type="text"
+  id="searchInput"
+  placeholder="Search aircraft..."
+  onkeyup="filterAircraft()"
+  class="search-box"
+/>
+
+<div id="aircraft-list" class="grid"></div>
+
+<script src="js/app.js"></script>
+<script>
+  loadAircrafts();
+</script>
+
+</body>
+</html>

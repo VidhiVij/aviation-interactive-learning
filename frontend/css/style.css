@@ -1,0 +1,299 @@
+/* ================================
+   GOOGLE FONTS
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap');
+
+/* ================================
+   GLOBAL STYLES
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+
+  background-image: url("../images/background/airport.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Optional overlay for better readability */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+/* ================================
+   PAGE TITLES
+================================ */
+.page-title {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+/* ================================
+   HERO SECTION (HOME PAGE)
+================================ */
+.hero {
+  height: 100vh;
+  background-image: url("../images/background/main.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Dark overlay for readability */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Hero heading */
+.overlay h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Hero subtitle */
+.overlay p {
+  font-size: 1.4rem;
+  max-width: 750px;
+  line-height: 1.7;
+  opacity: 0.95;
+  margin-bottom: 35px;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.btn {
+  padding: 14px 30px;
+  margin: 10px 0;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1e40af;
+}
+
+.btn.outline {
+  background: transparent;
+  border: 2px solid white;
+}
+
+.btn.outline:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ================================
+   GRID LAYOUTS
+================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ================================
+   SEARCH BOX
+================================ */
+.search-box {
+  display: block;
+  margin: 20px auto;
+  width: 320px;
+  max-width: 90%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: rgba(250, 246, 246, 0.95);
+  color: #000;
+}
+
+
+/* ================================
+   CARDS (Aircraft / Parts)
+================================ */
+.card {
+  background: rgba(17, 24, 39, 0.9);
+  padding: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background: rgba(31, 41, 55, 0.95);
+}
+
+/* ================================
+   AIRCRAFT DETAILS
+================================ */
+.aircraft-details {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgba(2, 6, 23, 0.85);
+  border-radius: 16px;
+  line-height: 1.7;
+}
+.aircraft-img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;   /* 🔥 MOST IMPORTANT */
+  border-radius: 12px;
+  margin: 15px 0;
+  display: block;
+}
+/* ================================
+   PART DESCRIPTION EXPAND
+================================ */
+.part-desc {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+}
+
+.part-desc.show {
+  max-height: 1000px;
+}
+
+/* ================================
+   LOGIN PAGE
+================================ */
+.login-card {
+  width: 320px;
+  margin: 120px auto;
+  position: relative; /* needed for overlay */
+  padding: 35px 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  text-align: center;
+
+  /* Background image for login panel */
+  background-image: url("../images/background/login.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+}
+
+/* Optional overlay inside login card */
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* adjust opacity for readability */
+  border-radius: 14px;
+  z-index: -1;
+}
+
+/* Login Logo */
+.login-logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 100px;
+  border-radius: 10px;
+}
+
+/* Login Heading */
+.login-card h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  z-index: 1; /* above overlay */
+  position: relative;
+}
+
+/* Login Inputs */
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1; /* above overlay */
+  background: rgba(255,255,255,0.9);
+  color: #000;
+}
+
+/* Login Button */
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  z-index: 1; /* above overlay */
+}
+
+.login-card button:hover {
+  background-color: #1e40af;
+}
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .overlay h1 {
+    font-size: 2.6rem;
+    letter-spacing: 1.5px;
+  }
+
+  .overlay p {
+    font-size: 1.1rem;
+  }
+
+  .page-title {
+    font-size: 1.7rem;
+  }
+
+  .login-card {
+    width: 90%;
+    margin: 80px auto;
+  }
+}
+ 

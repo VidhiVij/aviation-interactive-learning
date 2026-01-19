@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+
+  <style>
+    /* ================================
+   BACKGROUND IMAGE BLUR LAYER
+================================ */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://wallpaperaccess.com/full/254415.jpg"); /* your image path */
+  background-size: cover;        /* fill the screen */
+  background-position: center;   /* center the image */
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+
+    /* ================================
+       CONTENT CONTAINER
+    ================================ */
+    .content {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 25px;
+      background: rgba(121, 90, 77, 0.306); /* 0.0 = fully transparent, 1.0 = solid */
+      border-radius: 14px;
+}
+
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    button {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    img {
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+
+    .aircraft {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background: rgb(252, 247, 247);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="content">
+    <h1>Admin Panel</h1>
+    <button id="logout">Logout</button>
+
+    <h2>Add Aircraft</h2>
+    <form id="aircraftForm">
+      <input type="text" id="name" placeholder="Aircraft Name" required /><br><br>
+      <input type="text" id="type" placeholder="Type" /><br><br>
+      <input type="text" id="description" placeholder="Description" /><br><br>
+      <input type="text" id="image" placeholder="Image URL" /><br><br>
+      <button type="submit">Add</button>
+    </form>
+
+    <h2>All Aircrafts</h2>
+    <div id="aircraftList"></div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) window.location.href = "admin.html";
+
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem("token");
+      window.location.href = "admin.html";
+    });
+
+    const aircraftForm = document.getElementById("aircraftForm");
+    const aircraftList = document.getElementById("aircraftList");
+
+    async function loadAircrafts() {
+      const res = await fetch("http://localhost:5000/api/aircrafts");
+      const data = await res.json();
+      aircraftList.innerHTML = "";
+
+      data.forEach(a => {
+        const div = document.createElement("div");
+        div.className = "aircraft";
+
+        let partsHTML = "";
+        if (a.parts && a.parts.length) {
+          partsHTML = "<h4>Parts:</h4><ul>";
+          a.parts.forEach(p => {
+            partsHTML += `<li>${p.name} - ${p.description}<br>
+            <img src="${p.partImage || ''}" width="120"></li>`;
+          });
+          partsHTML += "</ul>";
+        }
+
+        div.innerHTML = `
+          <strong>${a.name}</strong> (${a.type})<br>
+          ${a.description || ""}<br>
+          <img src="${a.image || ''}" width="180"><br>
+          ${partsHTML}
+          <button onclick="editAircraft('${a._id}')">Edit</button>
+          <button onclick="deleteAircraft('${a._id}')">Delete</button>
+        `;
+
+        aircraftList.appendChild(div);
+      });
+    }
+
+    loadAircrafts();
+
+    aircraftForm.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      const aircraftData = {
+        name: name.value,
+        type: type.value,
+        description: description.value,
+        image: image.value,
+        parts: []
+      };
+
+      const res = await fetch("http://localhost:5000/api/aircrafts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify(aircraftData)
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      aircraftForm.reset();
+      loadAircrafts();
+    });
+
+    async function deleteAircraft(id) {
+      if (!confirm("Delete this aircraft?")) return;
+
+      const res = await fetch(`http://localhost:5000/api/aircrafts/${id}`, {
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + token }
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      loadAircrafts();
+    }
+
+    async function editAircraft(id) {
+      const res = await fetch(`http://localhost:5000/api/aircrafts/${id}`);
+      const a = await res.json();
+
+      const newName = prompt("Name:", a.name);
+      const newType = prompt("Type:", a.type);
+      const newDescription = prompt("Description:", a.description);
+      const newImage = prompt("Image URL:", a.image);
+
+      const res2 = await fetch(`http://localhost:5000/api/aircrafts/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+          name: newName,
+          type: newType,
+          description: newDescription,
+          image: newImage
+        })
+      });
+
+      const data2 = await res2.json();
+      alert(data2.message);
+      loadAircrafts();
+    }
+  </script>
+
+</body>
+</html>
