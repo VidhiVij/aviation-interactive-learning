@@ -93,7 +93,7 @@ body::after {
     const aircraftList = document.getElementById("aircraftList");
 
     async function loadAircrafts() {
-      const res = await fetch("http://localhost:5000/api/aircrafts");
+      const res = await fetch("https://aviation-backend-4axd.onrender.com/api/aircrafts");
       const data = await res.json();
       aircraftList.innerHTML = "";
 
@@ -137,7 +137,7 @@ body::after {
         parts: []
       };
 
-      const res = await fetch("http://localhost:5000/api/aircrafts", {
+      const res = await fetch("https://aviation-backend-4axd.onrender.com/api/aircrafts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -155,7 +155,7 @@ body::after {
     async function deleteAircraft(id) {
       if (!confirm("Delete this aircraft?")) return;
 
-      const res = await fetch(`http://localhost:5000/api/aircrafts/${id}`, {
+      const res = await fetch(`https://aviation-backend-4axd.onrender.com/api/aircrafts/${id}`, {
         method: "DELETE",
         headers: { "Authorization": "Bearer " + token }
       });
@@ -166,7 +166,7 @@ body::after {
     }
 
     async function editAircraft(id) {
-      const res = await fetch(`http://localhost:5000/api/aircrafts/${id}`);
+      const res = await fetch(`https://aviation-backend-4axd.onrender.com/api/aircrafts/${id}`);
       const a = await res.json();
 
       const newName = prompt("Name:", a.name);
@@ -174,7 +174,7 @@ body::after {
       const newDescription = prompt("Description:", a.description);
       const newImage = prompt("Image URL:", a.image);
 
-      const res2 = await fetch(`http://localhost:5000/api/aircrafts/${id}`, {
+      const res2 = await fetch(`https://aviation-backend-4axd.onrender.com/api/aircrafts/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
