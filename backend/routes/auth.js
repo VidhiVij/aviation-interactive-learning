@@ -3,7 +3,7 @@ const router = express.Router();
 const Admin = require("../models/Admin");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "your_jwt_secret"; // store in .env in production
+const JWT_SECRET = process.env.JWT_SECRET; // store in .env in production
 
 // Admin login
 router.post("/login", async (req, res) => {
