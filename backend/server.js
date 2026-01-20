@@ -11,6 +11,7 @@ const aircraftRoutes = require("./routes/aircraft");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Admin credentials (used in auth logic)
 const ADMIN = {
   username: "admin",
   password: "admin123"
@@ -24,7 +25,12 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/aircrafts", aircraftRoutes);
 
-// MongoDB connection (Atlas)
+// Root route (FIX)
+app.get("/", (req, res) => {
+  res.send("Aviation Interactive Learning Backend is running 🚀");
+});
+
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Atlas connected"))
   .catch(err => console.error("MongoDB connection error:", err));
