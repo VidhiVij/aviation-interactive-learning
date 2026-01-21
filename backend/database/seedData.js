@@ -1,29 +1,18 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
+const Aircraft = require("./models/Aircraft");
 
-mongoose.connect("mongodb://127.0.0.1:27017/aviation");
+async function seedAircrafts() {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB Atlas connected");
 
-const Aircraft = mongoose.model(
-  "Aircraft",
-  new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String,
-    parts: [
-      {
-        name: String,
-        description: String
-      }
-    ]
-  })
-);
+    await Aircraft.deleteMany();
 
-(async () => {
-  await Aircraft.deleteMany();
-
-  await Aircraft.insertMany([
+    await Aircraft.insertMany([
     {
     "name": "Cessna 172S Skyhawk",
-    "image": "images/aircrafts/Cessna_172S.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/Cessna_172S.png",
     "description": "The Cessna 172S Skyhawk is one of the most widely used single-engine, high-wing aircraft in the world and is considered the benchmark for flight training and general aviation. Introduced as an evolution of earlier Skyhawk models, the 172S features a fuel-injected Lycoming IO-360-L2A engine producing 180 horsepower, offering improved climb performance and reliability compared to carbureted variants. Its high-wing configuration provides excellent downward visibility and inherent stability, making it ideal for student pilots, private owners, and flight schools. The aircraft typically seats four occupants and is capable of cruising at approximately 122 knots with a range of around 640 nautical miles. The 172S is known for its forgiving flight characteristics, strong safety record, and low operating costs. Modern versions are equipped with the Garmin G1000 glass cockpit, integrating flight instruments, navigation, and engine monitoring into a digital display system. The fixed tricycle landing gear and robust airframe allow operations from paved and semi-prepared runways. Overall, the Cessna 172S remains a reliable, economical, and versatile aircraft, widely respected for training, cross-country flying, and recreational aviation.",
     "parts": [
       {
@@ -54,7 +43,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Tecnam P‑Mentor",
-    "image": "images/aircrafts/Tecnam-P-Mentor.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/Tecnam-P-Mentor.png",
     "description": "The Tecnam P-Mentor is a modern two-seat training aircraft developed to meet the needs of contemporary flight schools and military pilot training programs. Designed with efficiency, safety, and cost-effectiveness in mind, the P-Mentor features a low-wing configuration and tandem seating, closely resembling the layout of advanced military trainers. It is powered by a reliable piston engine, optimized for both visual flight rules (VFR) and instrument flight rules (IFR) training. The aircraft incorporates advanced aerodynamics and lightweight composite materials, resulting in excellent handling characteristics and fuel efficiency. The P-Mentor supports aerobatic training within defined limits, allowing student pilots to gain experience in upset recovery and advanced maneuvers. Its modern glass cockpit avionics provide digital flight displays, navigation, and training-oriented systems such as data recording for post-flight analysis. With low operating and maintenance costs, the Tecnam P-Mentor is well-suited for high-utilization training environments. The aircraft bridges the gap between basic trainers and high-performance aircraft, preparing pilots for more complex platforms while maintaining safety and reliability.",
     "parts": [
       {
@@ -85,7 +74,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Diamond DA62",
-    "image": "images/aircrafts/DA62.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/DA62.png",
     "description": "TThe Diamond DA62 is a modern, twin-engine, multi-purpose aircraft designed for efficiency, safety, and comfort. Built primarily from advanced composite materials, the DA62 features a sleek aerodynamic profile that reduces drag and improves fuel efficiency. It is powered by two Austro Engine AE330 turbocharged diesel engines, which burn Jet-A fuel, offering lower operating costs and global fuel availability. The aircraft can seat up to seven occupants, making it suitable for personal transport, business travel, and surveillance missions. The DA62 cruises at approximately 190 knots and offers excellent range and endurance. A standout feature is its exceptional safety record, supported by redundant systems, excellent single-engine performance, and benign handling characteristics. The Garmin G1000 NXi avionics suite provides advanced navigation, weather, traffic awareness, and engine monitoring. Large windows and a quiet cabin enhance passenger comfort and visibility. Overall, the Diamond DA62 represents a balance of performance, economy, and modern technology in the light twin-engine category.",
     "parts": [
       {
@@ -116,7 +105,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Airbus A320",
-    "image": "images/aircrafts/A320.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/A320.png",
     "description": "The Airbus A320 is a narrow‑body, short‑ to medium‑haul commercial jet that revolutionized airline operations with its introduction of full fly‑by‑wire controls. First entering service in the late 1980s, the A320 family has become one of the most successful aircraft programs in aviation history. The aircraft typically seats between 150 and 180 passengers and is powered by either CFM International or Pratt & Whitney engines. A key innovation is the side‑stick controller and flight envelope protection system, which enhances safety by preventing pilots from exceeding aircraft limits. The A320 is known for its fuel efficiency, operational flexibility, and commonality across the A320 family, reducing pilot training and maintenance costs. Modern variants feature advanced avionics, wingtip sharklets, and improved engines for lower fuel burn and emissions. The A320 operates globally on thousands of routes, serving as a backbone of many airline fleets.",
     "parts": [
       {
@@ -147,7 +136,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Airbus A350",
-    "image": "images/aircrafts/A350.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/A350.png",
     "description": "The Airbus A350 XWB is a long‑range, wide‑body aircraft designed for efficiency, comfort, and environmental performance. Constructed largely from carbon‑fiber‑reinforced polymer, the A350 features a lightweight yet strong structure that reduces fuel burn and maintenance requirements. It is powered by Rolls‑Royce Trent XWB engines, among the most efficient large turbofan engines ever produced. The aircraft typically seats 300–350 passengers and offers ultra‑long‑haul capability. Advanced aerodynamics, including curved winglets and optimized wing design, contribute to exceptional performance. The A350 also emphasizes passenger comfort with a wider cabin, higher humidity, and lower cabin altitude. Airlines value the A350 for its operating economics, reliability, and ability to replace older wide‑body aircraft on long‑haul routes.",
     "parts": [
       {
@@ -178,7 +167,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Airbus A380",
-    "image": "images/aircrafts/A380.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/A380.png",
     "description": "The Airbus A380 is the world’s largest passenger aircraft, designed to handle high‑capacity, long‑haul routes between major hubs. Featuring a full double‑deck configuration, the A380 can carry more than 500 passengers in typical airline layouts. It is powered by four turbofan engines and incorporates advanced aerodynamics and materials to manage its immense size efficiently. The aircraft offers exceptional passenger comfort, with spacious cabins, reduced noise levels, and smooth ride quality. Airlines have used the A380 to maximize capacity at congested airports. Although production has ended, the A380 remains an engineering landmark and continues to operate on high‑demand routes.",
     "parts": [
       {
@@ -209,7 +198,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Boeing 737",
-    "image": "images/aircrafts/b737.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/b737.png",
     "description": "The Boeing 737 is one of the most successful and widely used narrow-body commercial aircraft in aviation history. Designed primarily for short- to medium-haul routes, it is operated by airlines all over the world due to its reliability, efficiency, and versatility. First introduced in the late 1960s, the 737 has evolved through multiple generations, including the Classic, Next Generation (NG), and the latest 737 MAX series. The aircraft typically accommodates between 130 and 190 passengers depending on configuration. It is powered by two turbofan engines mounted under low-mounted wings, allowing easy ground access for maintenance. The 737 is known for its strong performance on short runways, making it suitable for operations at smaller and regional airports. Modern variants feature advanced avionics, digital flight displays, and improved aerodynamics with winglets to reduce fuel consumption. Airlines benefit from cockpit commonality across variants, reducing pilot training costs. The aircraft’s durable structure and efficient turnaround times make it ideal for high-frequency operations. Overall, the Boeing 737 continues to be a backbone of global airline fleets, offering a balance of performance, operating economy, and proven design.",
     "parts": [
       {
@@ -240,7 +229,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Boeing 787 Dreamliner",
-    "image": "images/aircrafts/b787.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/b787.png",
     "description": "The Boeing 787 Dreamliner is a modern wide-body aircraft designed for long-haul, fuel-efficient operations and enhanced passenger comfort. It represents a major technological advancement in commercial aviation, with extensive use of composite materials that make up more than half of the aircraft’s structure. These materials reduce weight, improve fuel efficiency, and minimize corrosion. The 787 typically carries between 240 and 330 passengers and enables airlines to operate long-distance, point-to-point routes that were previously uneconomical. It is powered by advanced turbofan engines, such as the Rolls-Royce Trent 1000 or General Electric GEnx, which provide lower fuel burn and reduced noise levels. The aircraft features highly efficient aerodynamics, including raked wingtips, which reduce drag and improve range. Inside the cabin, the Dreamliner offers larger windows, improved air quality, higher humidity, and lower cabin altitude, enhancing passenger comfort on long flights. The 787 also uses advanced electrical systems instead of traditional pneumatic systems, increasing overall efficiency. Due to its lower operating costs and flexibility, the Boeing 787 has become a popular choice for airlines operating long-haul and medium-capacity routes.",
     "parts": [
       {
@@ -271,7 +260,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Boeing 777",
-    "image": "images/aircrafts/b777.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/b777.png",
     "description": "The Boeing 777 is a long-range, wide-body twin-engine aircraft developed to meet the demands of high-capacity international travel. Known for its reliability and performance, the 777 is widely used on long-haul routes across continents. It typically seats between 300 and 400 passengers, depending on the configuration. One of its most notable features is its powerful turbofan engines, among the largest and most powerful jet engines ever produced, allowing the aircraft to achieve exceptional range and payload capability. The 777 was one of the first commercial aircraft to be designed entirely using computer-aided design (CAD), improving accuracy and efficiency in manufacturing. It features advanced avionics, fly-by-wire assistance, and sophisticated flight management systems that enhance safety and reduce pilot workload. The aircraft’s large wings are optimized for long-distance efficiency, providing excellent lift and fuel economy. With strong structural design and proven ETOPS capability, the Boeing 777 can safely operate long overwater routes with only two engines. Airlines value the 777 for its durability, passenger comfort, and ability to operate on some of the world’s longest routes, making it a cornerstone of global long-haul aviation.",
     "parts": [
       {
@@ -302,7 +291,7 @@ const Aircraft = mongoose.model(
   },
   {
     "name": "Boeing 747",
-    "image": "images/aircrafts/b747.png",
+    "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/b747.png",
     "description": "The Boeing 747, famously known as the “Queen of the Skies,” is one of the most iconic aircraft in aviation history. Recognized by its distinctive hump-backed upper deck, the 747 was the world’s first wide-body jumbo jet and revolutionized long-distance air travel when it entered service in the early 1970s. Designed for high-capacity, long-haul routes, the aircraft can carry more than 400 passengers in typical airline configurations. It is powered by four turbofan engines, providing the thrust required for heavy payloads and intercontinental flights. The upper deck was originally intended for first-class seating but later enabled the aircraft’s conversion into a highly efficient cargo platform. The 747 features a strong swept-wing design that supports its large weight while maintaining stable cruise performance. Over the decades, multiple variants were developed, including passenger, cargo, and military versions. Although newer twin-engine aircraft have replaced it on many routes due to improved fuel efficiency, the Boeing 747 remains an engineering milestone. Its contribution to global connectivity, cargo transport, and aviation history ensures its lasting legacy even as it gradually retires from passenger service.",
     "parts": [
       {
@@ -333,6 +322,12 @@ const Aircraft = mongoose.model(
   }
 ]);
 
-  console.log("Data seeded");
-  process.exit();
-})();
+  console.log("✅ Aircraft data seeded successfully");
+  } catch (err) {
+    console.error("❌ Seeding error:", err);
+  } finally {
+    mongoose.disconnect();
+  }
+}
+
+seedAircrafts();

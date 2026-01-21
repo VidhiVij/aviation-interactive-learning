@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api";
+const API = "https://aviation-backend-4axd.onrender.com/api";
 
 /* ===============================
    LOGIN
