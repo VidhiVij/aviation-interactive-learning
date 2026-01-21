@@ -1,15 +1,14 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-require("dotenv").config();
-const mongoose = require("mongoose");
 const Aircraft = require("../models/Aircraft");
 
 async function seedAircrafts() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB connected");
+    console.log("MongoDB Atlas connected");
 
-    await Aircraft.deleteMany();
+    await Aircraft.deleteMany({});
+    console.log("Old aircraft data removed");
 
     await Aircraft.insertMany([
       {
@@ -77,11 +76,11 @@ async function seedAircrafts() {
   {
     "name": "Diamond DA62",
     "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/DA62.png",
-    "description": "TThe Diamond DA62 is a modern, twin-engine, multi-purpose aircraft designed for efficiency, safety, and comfort. Built primarily from advanced composite materials, the DA62 features a sleek aerodynamic profile that reduces drag and improves fuel efficiency. It is powered by two Austro Engine AE330 turbocharged diesel engines, which burn Jet-A fuel, offering lower operating costs and global fuel availability. The aircraft can seat up to seven occupants, making it suitable for personal transport, business travel, and surveillance missions. The DA62 cruises at approximately 190 knots and offers excellent range and endurance. A standout feature is its exceptional safety record, supported by redundant systems, excellent single-engine performance, and benign handling characteristics. The Garmin G1000 NXi avionics suite provides advanced navigation, weather, traffic awareness, and engine monitoring. Large windows and a quiet cabin enhance passenger comfort and visibility. Overall, the Diamond DA62 represents a balance of performance, economy, and modern technology in the light twin-engine category.",
+    "description": "The Diamond DA62 is a modern, twin-engine, multi-purpose aircraft designed for efficiency, safety, and comfort. Built primarily from advanced composite materials, the DA62 features a sleek aerodynamic profile that reduces drag and improves fuel efficiency. It is powered by two Austro Engine AE330 turbocharged diesel engines, which burn Jet-A fuel, offering lower operating costs and global fuel availability. The aircraft can seat up to seven occupants, making it suitable for personal transport, business travel, and surveillance missions. The DA62 cruises at approximately 190 knots and offers excellent range and endurance. A standout feature is its exceptional safety record, supported by redundant systems, excellent single-engine performance, and benign handling characteristics. The Garmin G1000 NXi avionics suite provides advanced navigation, weather, traffic awareness, and engine monitoring. Large windows and a quiet cabin enhance passenger comfort and visibility. Overall, the Diamond DA62 represents a balance of performance, economy, and modern technology in the light twin-engine category.",
     "parts": [
       {
         "name": "Cockpit",
-        "description": "TThe cockpit of the Diamond DA62 is designed for dual-pilot operation and passenger comfort. It features a side-by-side seating arrangement for the pilot and co-pilot, with ergonomically positioned controls for easy access during flight. The cockpit includes full flight controls, throttle quadrants, rudder pedals, and flap controls, providing complete command of the aircraft. It is equipped with a modern Garmin G1000 NXi glass cockpit, displaying flight, navigation, engine, and system data in an integrated format. Visibility is excellent in all directions due to the large canopy and windows, essential for navigation, takeoff, and landing. The cockpit also includes climate control, noise insulation, and safety features such as energy-absorbing seats and reinforced structures. It serves as the central hub for both control and situational awareness, allowing pilots to operate the aircraft safely and efficiently, while also providing the space and systems needed for long-range operations and advanced training."
+        "description": "The cockpit of the Diamond DA62 is designed for dual-pilot operation and passenger comfort. It features a side-by-side seating arrangement for the pilot and co-pilot, with ergonomically positioned controls for easy access during flight. The cockpit includes full flight controls, throttle quadrants, rudder pedals, and flap controls, providing complete command of the aircraft. It is equipped with a modern Garmin G1000 NXi glass cockpit, displaying flight, navigation, engine, and system data in an integrated format. Visibility is excellent in all directions due to the large canopy and windows, essential for navigation, takeoff, and landing. The cockpit also includes climate control, noise insulation, and safety features such as energy-absorbing seats and reinforced structures. It serves as the central hub for both control and situational awareness, allowing pilots to operate the aircraft safely and efficiently, while also providing the space and systems needed for long-range operations and advanced training."
       },
       {
         "name": "Fuselage",
@@ -101,7 +100,7 @@ async function seedAircrafts() {
       },
       {
         "name": "Powerplant Installation",
-        "description": "TThe Diamond DA62 is powered by two Austro AE330 diesel engines, mounted in nacelles on the wings near the fuselage. The engine installation includes reinforced mounting points, cowling, and propeller hubs. This structure ensures the engines remain secure, transmit thrust efficiently, and minimize vibration. Airflow is directed through cooling ducts to maintain engine temperature, while structural reinforcements protect the fuselage and cockpit. The engines are integrated with full monitoring systems, transmitting data to cockpit displays for fuel, temperature, RPM, and system performance. Redundant systems ensure safety in case of engine failure. Proper installation is critical for thrust generation, vibration management, safety, and overall aircraft performance."
+        "description": "The Diamond DA62 is powered by two Austro AE330 diesel engines, mounted in nacelles on the wings near the fuselage. The engine installation includes reinforced mounting points, cowling, and propeller hubs. This structure ensures the engines remain secure, transmit thrust efficiently, and minimize vibration. Airflow is directed through cooling ducts to maintain engine temperature, while structural reinforcements protect the fuselage and cockpit. The engines are integrated with full monitoring systems, transmitting data to cockpit displays for fuel, temperature, RPM, and system performance. Redundant systems ensure safety in case of engine failure. Proper installation is critical for thrust generation, vibration management, safety, and overall aircraft performance."
       }
     ]
   },
@@ -124,7 +123,7 @@ async function seedAircrafts() {
       },
       {
         "name": "Empennage (Tail Section)",
-        "description": "TThe A320’s empennage includes a vertical stabilizer (fin), rudder, horizontal stabilizer, and elevators. The vertical stabilizer maintains directional stability, while the rudder provides yaw control during turns and crosswind operations. The horizontal stabilizer balances the aircraft longitudinally, while elevators control pitch for climbs, descents, and trimming. The tail surfaces are constructed with aluminum and composite materials to reduce weight and improve aerodynamic efficiency. Fly-by-wire actuators control the rudder and elevators based on pilot input, providing precise, stable responses. The empennage also supports aerodynamic balance, reducing pilot workload and ensuring predictable handling, even at high speeds or during turbulence. It is essential for safe, controlled flight throughout all phases of operation."
+        "description": "The A320’s empennage includes a vertical stabilizer (fin), rudder, horizontal stabilizer, and elevators. The vertical stabilizer maintains directional stability, while the rudder provides yaw control during turns and crosswind operations. The horizontal stabilizer balances the aircraft longitudinally, while elevators control pitch for climbs, descents, and trimming. The tail surfaces are constructed with aluminum and composite materials to reduce weight and improve aerodynamic efficiency. Fly-by-wire actuators control the rudder and elevators based on pilot input, providing precise, stable responses. The empennage also supports aerodynamic balance, reducing pilot workload and ensuring predictable handling, even at high speeds or during turbulence. It is essential for safe, controlled flight throughout all phases of operation."
       },
       {
         "name": "Landing Gear",
@@ -151,7 +150,7 @@ async function seedAircrafts() {
       },
       {
         "name": "Empennage (Tail Section)",
-        "description": "CThe A350 empennage consists of a horizontal stabilizer, elevators, vertical stabilizer, and rudder, providing longitudinal and directional stability. The horizontal stabilizer maintains pitch balance, while the elevators control ascent, descent, and trim. The vertical stabilizer ensures yaw stability, and the rudder allows directional control during turns and crosswind operations. Constructed from composites, the empennage is lightweight, strong, and aerodynamically optimized. Fly-by-wire actuators manage control surfaces, ensuring precise, smooth handling and reducing pilot workload. The tail section is vital for safe, stable flight, particularly during takeoff, landing, turbulence, or emergency maneuvers."
+        "description": "The A350 empennage consists of a horizontal stabilizer, elevators, vertical stabilizer, and rudder, providing longitudinal and directional stability. The horizontal stabilizer maintains pitch balance, while the elevators control ascent, descent, and trim. The vertical stabilizer ensures yaw stability, and the rudder allows directional control during turns and crosswind operations. Constructed from composites, the empennage is lightweight, strong, and aerodynamically optimized. Fly-by-wire actuators manage control surfaces, ensuring precise, smooth handling and reducing pilot workload. The tail section is vital for safe, stable flight, particularly during takeoff, landing, turbulence, or emergency maneuvers."
       },
       {
         "name": "Fuselage",
@@ -194,7 +193,7 @@ async function seedAircrafts() {
       },
       {
         "name": "Engine Nacelles / Powerplant Installation",
-        "description": "TThe A380 is powered by four high-bypass turbofan engines mounted on reinforced pylons under the wings. The nacelles secure the engines, control airflow for thrust and cooling, and reduce vibration and aerodynamic drag. Engines are fully integrated with electronic monitoring systems to manage fuel, performance, and health status in real time. Redundant safety systems allow continued operation in case of engine failure. The nacelle and pylon structure are designed to withstand aerodynamic loads, engine torque, and operational stress, ensuring efficient propulsion, optimal fuel efficiency, and safe long-range operation. The engines provide the necessary thrust to lift one of the world’s largest passenger aircraft safely and efficiently."
+        "description": "The A380 is powered by four high-bypass turbofan engines mounted on reinforced pylons under the wings. The nacelles secure the engines, control airflow for thrust and cooling, and reduce vibration and aerodynamic drag. Engines are fully integrated with electronic monitoring systems to manage fuel, performance, and health status in real time. Redundant safety systems allow continued operation in case of engine failure. The nacelle and pylon structure are designed to withstand aerodynamic loads, engine torque, and operational stress, ensuring efficient propulsion, optimal fuel efficiency, and safe long-range operation. The engines provide the necessary thrust to lift one of the world’s largest passenger aircraft safely and efficiently."
       }
     ]
   },
@@ -320,13 +319,16 @@ async function seedAircrafts() {
         "name": "Engine Nacelles / Powerplant Installation",
         "description": "The Boeing 747 is powered by four high-bypass turbofan engines, mounted on reinforced pylons beneath the wings. Engine nacelles provide structural support, reduce vibration, and optimize airflow for thrust and cooling. Engines are integrated with monitoring systems to track performance, fuel consumption, and health status. Redundant systems ensure continued operation in the event of a single engine failure. Structural pylons distribute engine loads safely to the wing and fuselage. Proper installation is critical for reliable propulsion, efficiency, and safety, enabling the 747 to transport hundreds of passengers and cargo across intercontinental distances."
       }
+        ]
+      }
     ]);
 
-    console.log("Aircraft seeded");
-  } catch (err) {
-    console.error(err);
+    console.log("✅ Aircraft data seeded successfully");
+  } catch (error) {
+    console.error("❌ Seeding error:", error);
   } finally {
-    mongoose.disconnect();
+    await mongoose.disconnect();
+    console.log("MongoDB disconnected");
   }
 }
 

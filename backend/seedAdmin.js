@@ -2,26 +2,32 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const Admin = require("./models/Admin");
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Atlas connected"))
-  .catch(err => console.error(err));
-
-async function createAdmin() {
+async function updateAdminPassword() {
   try {
-    const exists = await Admin.findOne({ username: "admin" });
-    if (!exists) {
-      const admin = new Admin({
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB connected");
+
+    const admin = await Admin.findOne({ username: "admin" });
+
+    if (!admin) {
+      console.log("Admin not found, creating new admin...");
+      const newAdmin = new Admin({
         username: "admin",
-        password: "admin123"
+        password: "Aviation@project"   // 🔴 NEW PASSWORD
       });
-      await admin.save();
-      console.log("Admin created in Atlas");
+      await newAdmin.save();
+      console.log("Admin created with new password");
     } else {
-      console.log("Admin already exists");
+      admin.password = "Aviation@project"; // 🔴 NEW PASSWORD
+      await admin.save(); // bcrypt will hash automatically
+      console.log("Admin password updated successfully");
     }
+  } catch (err) {
+    console.error(err);
   } finally {
-    mongoose.disconnect();
+    await mongoose.disconnect();
+    console.log("MongoDB disconnected");
   }
 }
 
-createAdmin();
+updateAdminPassword();
