@@ -2,14 +2,11 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const Aircraft = require("./models/Aircraft");
 
-async function seedAircrafts() {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Atlas connected");
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Atlas connected"))
+  .catch(err => console.error(err));
 
-    await Aircraft.deleteMany();
-
-    await Aircraft.insertMany([
+const aircrafts = [
     {
     "name": "Cessna 172S Skyhawk",
     "image": "images/aircrafts/Cessna_172S.png",
@@ -320,14 +317,13 @@ async function seedAircrafts() {
       }
     ]
   }
-]);
+];
 
-   console.log("✅ Aircraft data seeded successfully");
-  } catch (err) {
-    console.error(err);
-  } finally {
-    mongoose.disconnect();
-  }
+  async function seed() {
+  await Aircraft.deleteMany();
+  await Aircraft.insertMany(aircrafts);
+  console.log("Aircraft data seeded in Atlas");
+  mongoose.disconnect();
 }
 
-seedAircrafts();
+seed();
