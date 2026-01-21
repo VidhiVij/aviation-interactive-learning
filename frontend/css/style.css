@@ -41,6 +41,14 @@ body::before {
   font-weight: 600;
 }
 
+.section-title {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+
 /* ================================
    HERO SECTION (HOME PAGE)
 ================================ */
