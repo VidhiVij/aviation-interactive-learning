@@ -195,25 +195,81 @@ body::before {
 .login-card {
   width: 320px;
   margin: 120px auto;
+  position: relative; /* needed for overlay */
   padding: 35px 25px;
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   text-align: center;
-  background-image: url("../images/background/login.jpg");
+
+  /* Background image for login panel */
+  background-image: url("../images/background/login.jpg"); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: white;
   position: relative;
+  color: white;
 }
 
+/* Optional overlay inside login card */
 .login-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5); /* adjust opacity for readability */
   border-radius: 14px;
   z-index: -1;
+}
+
+/* Login Logo */
+.login-logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 100px;
+  border-radius: 10px;
+}
+
+/* Login Heading */
+.login-card h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  z-index: 1; /* above overlay */
+  position: relative;
+}
+
+/* Login Inputs */
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1; /* above overlay */
+  background: rgba(255,255,255,0.9);
+  color: #000;
+}
+
+/* Login Button */
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  z-index: 1; /* above overlay */
+}
+
+.login-card button:hover {
+  background-color: #1e40af;
 }
 
 /* ================================
