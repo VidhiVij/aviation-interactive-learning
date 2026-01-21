@@ -1,16 +1,18 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const Aircraft = require("./models/Aircraft");
+require("dotenv").config();
+const mongoose = require("mongoose");
+const Aircraft = require("../models/Aircraft");
 
 async function seedAircrafts() {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("✅ MongoDB Atlas connected");
+    console.log("MongoDB connected");
 
     await Aircraft.deleteMany();
 
     await Aircraft.insertMany([
-    {
+      {
     "name": "Cessna 172S Skyhawk",
     "image": "https://aviationinteractivelearningplatform.netlify.app/images/aircrafts/Cessna_172S.png",
     "description": "The Cessna 172S Skyhawk is one of the most widely used single-engine, high-wing aircraft in the world and is considered the benchmark for flight training and general aviation. Introduced as an evolution of earlier Skyhawk models, the 172S features a fuel-injected Lycoming IO-360-L2A engine producing 180 horsepower, offering improved climb performance and reliability compared to carbureted variants. Its high-wing configuration provides excellent downward visibility and inherent stability, making it ideal for student pilots, private owners, and flight schools. The aircraft typically seats four occupants and is capable of cruising at approximately 122 knots with a range of around 640 nautical miles. The 172S is known for its forgiving flight characteristics, strong safety record, and low operating costs. Modern versions are equipped with the Garmin G1000 glass cockpit, integrating flight instruments, navigation, and engine monitoring into a digital display system. The fixed tricycle landing gear and robust airframe allow operations from paved and semi-prepared runways. Overall, the Cessna 172S remains a reliable, economical, and versatile aircraft, widely respected for training, cross-country flying, and recreational aviation.",
@@ -318,13 +320,11 @@ async function seedAircrafts() {
         "name": "Engine Nacelles / Powerplant Installation",
         "description": "The Boeing 747 is powered by four high-bypass turbofan engines, mounted on reinforced pylons beneath the wings. Engine nacelles provide structural support, reduce vibration, and optimize airflow for thrust and cooling. Engines are integrated with monitoring systems to track performance, fuel consumption, and health status. Redundant systems ensure continued operation in the event of a single engine failure. Structural pylons distribute engine loads safely to the wing and fuselage. Proper installation is critical for reliable propulsion, efficiency, and safety, enabling the 747 to transport hundreds of passengers and cargo across intercontinental distances."
       }
-    ]
-  }
-]);
+    ]);
 
-  console.log("✅ Aircraft data seeded successfully");
+    console.log("Aircraft seeded");
   } catch (err) {
-    console.error("❌ Seeding error:", err);
+    console.error(err);
   } finally {
     mongoose.disconnect();
   }
